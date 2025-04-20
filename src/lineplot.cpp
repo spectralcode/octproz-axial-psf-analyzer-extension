@@ -417,7 +417,7 @@ void LinePlot::resizeEvent(QResizeEvent *event) {
 }
 
 void LinePlot::changeEvent(QEvent *event) {
-	if(event->ActivationChange){
+	if(event->type() == QEvent::ActivationChange){
 		if(!this->isEnabled()){
 			this->curveColor.setAlpha(55);
 			this->referenceCurveColor.setAlpha(25);
