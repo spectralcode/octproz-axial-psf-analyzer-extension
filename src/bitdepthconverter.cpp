@@ -38,9 +38,7 @@ void BitDepthConverter::convertDataTo8bit(void *inputData, int bitDepth, int sam
 		}
 		//no conversion needed if inputData is already 8bit or below
 		if (bitDepth <= 8){
-			for(int i=0; i<length; i++){
-				this->output8bitData[i] = static_cast<ushort*>(inputData)[i]; //todo: replace this for loop by memcpy
-			}
+			memcpy(this->output8bitData, inputData, length * sizeof(uchar));
 		}
 		//convert to 8 bit element by element
 		else if (bitDepth >= 9 && bitDepth <=16){
