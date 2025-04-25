@@ -539,16 +539,16 @@ bool LinePlot::saveAllCurvesToFile( QString fileName) {
 
 	//combine all keys from all graphs
 	QSet<double> allKeys;
-	for (const auto &dataMap : allData) {
+	for (const auto &dataMap : qAsConst(allData)) {
 		allKeys.unite(QSet<double>::fromList(dataMap.keys()));
 	}
 	QList<double> sortedKeys = QList<double>::fromSet(allKeys);
 	std::sort(sortedKeys.begin(), sortedKeys.end());
 
 	//write keys (x coordinate) and values (y coordinate)
-	for (double key : sortedKeys) {
+	for (double key : qAsConst(sortedKeys)) {
 		stream << QString::number(key);
-		for (const auto &dataMap : allData) {
+		for (const auto &dataMap : qAsConst(allData)) {
 			double value = dataMap.value(key, std::numeric_limits<double>::quiet_NaN());
 			QString valueString = std::isnan(value) ? "" : QString::number(value);
 			stream << ";" << valueString;
